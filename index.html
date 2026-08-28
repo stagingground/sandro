@@ -90,7 +90,6 @@ section[id]{scroll-margin-top:var(--header-offset)}
 }
 .hero-heading{grid-area:heading;min-width:0;max-width:100%}
 .hero h1{margin:0;max-width:680px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,3.25vw,2.47rem);line-height:1.02;letter-spacing:-.03em;font-weight:700;text-wrap:balance}
-.hero h1 .hero-line{display:block;white-space:nowrap}
 .hero h1 .accent{color:var(--red)}
 .hero-meta{margin:10px 0 0;color:var(--ink);font-size:.76rem;letter-spacing:.13em}
 .hero-lede{margin:28px 0 0;max-width:680px;font-size:.98rem;line-height:1.65;color:#3d3834;text-align:justify;text-justify:inter-word;hyphens:auto}
@@ -181,7 +180,6 @@ section[id]{scroll-margin-top:var(--header-offset)}
   .hero{padding:6px 0 46px}
   .hero-grid{grid-template-columns:minmax(0,1fr) minmax(155px,35%);column-gap:16px}
   .hero h1{font-size:clamp(1.35rem,4vw,1.78rem);line-height:1.01}
-.hero h1 .hero-line{white-space:nowrap}
   .hero-lede{margin-top:24px;font-size:.93rem;line-height:1.58}
   .hero-meta{font-size:.7rem;letter-spacing:.11em}
   .intro-bridge{padding:22px 24px}
@@ -202,7 +200,6 @@ section[id]{scroll-margin-top:var(--header-offset)}
   .brand{font-size:1.8rem}
   .brand-sub{font-size:.82rem;letter-spacing:.24em}
   .hero-grid{grid-template-columns:1fr;grid-template-areas:"heading" "portrait" "video" "quote";row-gap:18px}
-  .hero h1 .hero-line{white-space:nowrap}
   .hero h1{font-size:clamp(1.28rem,6.6vw,1.8rem);line-height:1.02}
   .portrait-wrap{width:min(76vw,270px);justify-self:end}
   .video-module{max-width:none}
@@ -224,9 +221,69 @@ section[id]{scroll-margin-top:var(--header-offset)}
   line-height:1.02 !important;
 }
 
-.hero h1 .hero-line{
-  display:block;
-  white-space:nowrap !important;
+
+/* DISPLAY TYPE CAP — no display text exceeds 60% of the SANDRO MONETTI wordmark size */
+:root{--heading-cap:1.56rem}
+
+.hero h1{
+  font-size:min(clamp(1.3rem,7.8cqi,2.47rem),var(--heading-cap)) !important;
+}
+.section-title{
+  font-size:min(clamp(2rem,3.7vw,3.1rem),var(--heading-cap));
+}
+.approach-services > .eyebrow{
+  font-size:min(1.55rem,var(--heading-cap));
+}
+.step .num{
+  font-size:min(1.9rem,var(--heading-cap));
+}
+.step h3{
+  font-size:min(1.08rem,var(--heading-cap));
+}
+.service h3{
+  font-size:min(1.28rem,var(--heading-cap));
+}
+.bio-feature h2{
+  font-size:min(clamp(2.25rem,4.2vw,3.6rem),var(--heading-cap));
+}
+.bio-feature-quote{
+  font-size:min(clamp(1.35rem,2.2vw,1.8rem),var(--heading-cap));
+}
+.contact-email{
+  font-size:min(clamp(1.7rem,4vw,3rem),var(--heading-cap));
+}
+.footer-brand{
+  font-size:min(1.45rem,var(--heading-cap));
+}
+
+@media (max-width:900px){
+  :root{--heading-cap:1.41rem}
+}
+
+@media (max-width:700px){
+  :root{--heading-cap:1.26rem}
+}
+
+@media (max-width:480px){
+  :root{--heading-cap:1.08rem}
+}
+
+
+
+
+/* HERO HEADLINE — wrap naturally at the portrait column */
+.hero-heading{
+  min-width:0;
+  max-width:100%;
+}
+
+.hero h1{
+  width:100%;
+  max-width:100%;
+  white-space:normal !important;
+  text-wrap:wrap !important;
+  overflow-wrap:normal;
+  word-break:normal;
 }
 
 </style></head>
@@ -255,7 +312,7 @@ section[id]{scroll-margin-top:var(--header-offset)}
 <section class="hero" id="introduction">
 <div class="container hero-grid">
   <div class="hero-heading">
-    <h1><span class="hero-line">I understand the spotlight</span><span class="hero-line">and <span class="accent">help you step into it.</span></span></h1>
+    <h1>I understand the spotlight and <span class="accent">help you step into it.</span></h1>
     <p class="hero-lede">I help exceptional people turn talent into visibility, visibility into credibility, and credibility into opportunity.</p>
   </div>
 
@@ -332,8 +389,7 @@ section[id]{scroll-margin-top:var(--header-offset)}
   setHeaderOffset();
   window.addEventListener('resize', setHeaderOffset, {passive:true});
   if ('ResizeObserver' in window && header) new ResizeObserver(setHeaderOffset).observe(header);
-
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
+document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', event => {
       const selector = link.getAttribute('href');
       const target = selector === '#page-top' ? document.body : document.querySelector(selector);
