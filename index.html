@@ -82,6 +82,7 @@ section[id]{scroll-margin-top:var(--header-offset)}
   grid-template-columns:minmax(0,1fr) minmax(320px,360px);
   grid-template-areas:
     "heading portrait"
+    "lede portrait"
     "video portrait"
     "quote quote";
   column-gap:34px;
@@ -92,7 +93,7 @@ section[id]{scroll-margin-top:var(--header-offset)}
 .hero h1{margin:0;max-width:680px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,3.25vw,2.47rem);line-height:1.02;letter-spacing:-.03em;font-weight:700;text-wrap:balance}
 .hero h1 .accent{color:var(--red)}
 .hero-meta{margin:10px 0 0;color:var(--ink);font-size:.76rem;letter-spacing:.13em}
-.hero-lede{margin:28px 0 0;max-width:680px;font-size:.98rem;line-height:1.65;color:#3d3834;text-align:justify;text-justify:inter-word;hyphens:auto}
+.hero-lede{grid-area:lede;margin:10px 0 0;max-width:680px;font-size:.98rem;line-height:1.65;color:#3d3834;text-align:justify;text-justify:inter-word;hyphens:auto}
 .video-module{grid-area:video;width:100%;max-width:520px;align-self:end;margin:0}
 .video-card{position:relative;width:100%;padding:0;border:0;background:#000;border-radius:18px;overflow:hidden;cursor:pointer;aspect-ratio:16/9;box-shadow:0 18px 36px rgba(0,0,0,.12)}
 .video-card img{width:100%;height:100%;object-fit:cover;opacity:.92;transition:transform .3s ease,opacity .3s ease}
@@ -202,9 +203,10 @@ section[id]{scroll-margin-top:var(--header-offset)}
 @media (max-width:480px){
   .brand{font-size:1.8rem}
   .brand-sub{font-size:.82rem;letter-spacing:.24em}
-  .hero-grid{grid-template-columns:1fr;grid-template-areas:"heading" "portrait" "video" "quote";row-gap:18px}
-  .hero h1{font-size:clamp(1.28rem,6.6vw,1.8rem);line-height:1.02}
-  .portrait-wrap{width:min(76vw,270px);justify-self:end}
+  .hero-grid{grid-template-columns:1fr;grid-template-areas:"heading" "portrait" "lede" "video" "quote";row-gap:18px}
+  .hero h1{font-size:clamp(1.75rem,8vw,2.15rem) !important;line-height:1.02}
+  .hero-lede{margin:0}
+  .portrait-wrap{width:min(62vw,220px);justify-self:end}
   .video-module{max-width:none}
   .service-grid,.process-grid{grid-template-columns:1fr}
   .service,.service:nth-child(even){padding:22px 0;border-left:0}
@@ -326,6 +328,19 @@ section[id]{scroll-margin-top:var(--header-offset)}
   text-wrap:balance !important;
 }
 
+
+/* FINAL PHONE HERO OVERRIDES */
+@media (max-width:480px){
+  .hero h1{font-size:clamp(1.75rem,8vw,2.15rem) !important;line-height:1.02 !important}
+  .portrait-wrap{
+    width:calc(100% + 26px);
+    margin-left:-13px;
+    justify-self:stretch;
+    aspect-ratio:1.09 / 1;
+  }
+  .portrait-wrap img{object-position:center top}
+}
+
 </style></head>
 <body id="page-top">
 <header class="site-header">
@@ -353,8 +368,9 @@ section[id]{scroll-margin-top:var(--header-offset)}
 <div class="container hero-grid">
   <div class="hero-heading">
     <h1>I understand the spotlight and <span class="accent">help you step into it.</span></h1>
-    <p class="hero-lede">I help exceptional people turn talent into visibility, visibility into credibility, and credibility into opportunity.</p>
   </div>
+
+  <p class="hero-lede">I ensure exceptional people turn talent into visibility, visibility into credibility, and credibility into opportunity.</p>
 
   <div class="video-module" aria-label="Introduction video">
     <button class="video-card" type="button" data-video="A1W36n3o8lo" aria-label="Play Sandro Monetti introduction video">
